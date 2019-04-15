@@ -116,19 +116,11 @@ playerTwoCards = fullDeck.splice(0,26)
 /**************************************************/
 
 
-                                        // discardPile = [];
 x = 0;
     while (x < 2) {
         
         if (playerOneCards[x].score > playerTwoCards[x].score) {
             console.log("Player One wins")
-                                        // discardPile.push(playerOneCards[x])
-                                        // playerOneCards.shift([x])
-                                        // discardPile.push(playerTwoCards[x])
-                                        // playerTwoCards.shift([x])
-                                        // console.log(discardPile)
-            
-            // 
             playerOneCards.push(playerTwoCards[x]);
             console.log(playerOneCards.length)          // Player One cards should add 1
             playerTwoCards.pop([x]);
@@ -138,18 +130,16 @@ x = 0;
             console.log(playerOneCards.length)
             x++;
             console.log(playerOneCards)
-        } else {
-                                        // console.log("Player Two wins")
-                                        // discardPile.push(playerOneCards[x])
-                                        // playerOneCards.shift([x])
-                                        // discardPile.push(playerTwoCards[x])
-                                        // playerTwoCards.shift([x])
-                                        // console.log(discardPile)
+        } else if (playerTwoCards[x].score > playerOneCards[x].score) {
             console.log("Player Two wins")
             playerTwoCards.push(playerOneCards[x]);
             playerOneCards.pop([x]);
             playerTwoCards.push(playerTwoCards[x]);
             x++;                        
+        } else {
+            playerOneCards.push(playerOneCards([x]))    // Step 6. In the case of the tie, each player takes the card they played and places it 
+            playerTwoCards.push(playerTwoCards([x]))    // at the bottom of their stack, and then the game automatically plays the next round.
+            x++;
         }
 
     }

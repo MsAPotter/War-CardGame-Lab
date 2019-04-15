@@ -45,7 +45,7 @@ class Player {
 
 // let fullDeck = new Deck()
 
-fullDeck = [];
+let fullDeck = [];
 
 function putDeckTogether() {
     for(let i = 0; i < ranks.length; i++) {
@@ -87,16 +87,18 @@ function shuffleArray(fullDeck) {
 }
 shuffleArray(fullDeck)
 console.log(fullDeck)
-shuffleArray(fullDeck)
 
  /*********** 4.b. and distribute it evenly to two players - one user, one computer.  ***********/
 /**************************************************/
 
 playerOneCards = fullDeck.splice(0,26)
-console.log(playerOneCards)
-console.log(playerOneCards[0].score)
+// console.log(playerOneCards)
+// console.log(playerOneCards.length)
+// console.log(playerOneCards[0].score)
 playerTwoCards = fullDeck.splice(0,26)
-console.log(playerTwoCards[0].score)
+// console.log(playerTwoCards)
+// console.log(playerTwoCards[0].score)
+// console.log(playerTwoCards.length)
 
 
 // // playerOne = document.querySelector('#p1');
@@ -113,22 +115,41 @@ console.log(playerTwoCards[0].score)
 /*********** 5. handle the logic for adding the cards to bottom of the stack of the winning player.  ***********/
 /**************************************************/
 
+
+                                        // discardPile = [];
 x = 0;
-    while (x < 26) {
+    while (x < 2) {
+        
         if (playerOneCards[x].score > playerTwoCards[x].score) {
             console.log("Player One wins")
-            playerTwoCards.shift();
+                                        // discardPile.push(playerOneCards[x])
+                                        // playerOneCards.shift([x])
+                                        // discardPile.push(playerTwoCards[x])
+                                        // playerTwoCards.shift([x])
+                                        // console.log(discardPile)
+            
+            // 
             playerOneCards.push(playerTwoCards[x]);
-            playerOneCards.push(playerOneCards[x]);
+            console.log(playerOneCards.length)          // Player One cards should add 1
+            playerTwoCards.pop([x]);
+            console.log(playerTwoCards.length)          // Player Two cards should minus 1
+
+            playerOneCards.push(playerOneCards[x]);     // Player One cards should add 1 (for 2 total)
+            console.log(playerOneCards.length)
             x++;
             console.log(playerOneCards)
         } else {
+                                        // console.log("Player Two wins")
+                                        // discardPile.push(playerOneCards[x])
+                                        // playerOneCards.shift([x])
+                                        // discardPile.push(playerTwoCards[x])
+                                        // playerTwoCards.shift([x])
+                                        // console.log(discardPile)
             console.log("Player Two wins")
-            playerOneCards.shift();
             playerTwoCards.push(playerOneCards[x]);
+            playerOneCards.pop([x]);
             playerTwoCards.push(playerTwoCards[x]);
-            x++;
-            console.log(playerTwoCards)
+            x++;                        
         }
 
     }

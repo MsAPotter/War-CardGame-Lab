@@ -15,16 +15,6 @@ class Card {
     }
 }
 
-// class Deck {
-//     constructor() {
-//         this.length = 52
-//         this.cards = []
-//     }
-//     draw() {
-//         let random = Math.floor(Math.random() * 51)
-//         return this.cards[random]
-//     }
-// }
 
  /*********** 2. Create a class for a Player, with the property "stack" as an array. This will hold the cards.  */
 
@@ -43,8 +33,6 @@ class Player {
 /***********  and use the Player class to generate two Players for the game.  *****************************/
 
 
-// let fullDeck = new Deck()
-
 let fullDeck = [];
 
 function putDeckTogether() {
@@ -60,18 +48,12 @@ function putDeckTogether() {
 
 }
 putDeckTogether()
-console.log(fullDeck)
-
-// console.log(fullDeck.draw())
-
-// let Deck = fullDeck.cards
+// console.log(fullDeck)
 
 let playerOneCards = Player.stack;
 let playerTwoCards = Player.stack;
 
-//shuffle fullDeck
-// divide fulldeck between two players
-// 
+
 
  /*********** 4.a. "Shuffle" the deck   ***********/
 /**************************************************/
@@ -86,7 +68,7 @@ function shuffleArray(fullDeck) {
     }
 }
 shuffleArray(fullDeck)
-console.log(fullDeck)
+// console.log(fullDeck)
 
  /*********** 4.b. and distribute it evenly to two players - one user, one computer.  ***********/
 /**************************************************/
@@ -101,46 +83,46 @@ playerTwoCards = fullDeck.splice(0,26)
 // console.log(playerTwoCards.length)
 
 
-// // playerOne = document.querySelector('#p1');
-// // playerOne.addEventListener('click', drawCard)
-
-// // playerTwo = document.querySelector('#p2');
-// // playerTwo.addEventListener('click', drawCard)
-
-// // function drawCard() {
-//     playerOneCards = fullDeck.splice(0,26)
-//     playerTwoCards = fullDeck.splice(0,26)
-
-
 /*********** 5. handle the logic for adding the cards to bottom of the stack of the winning player.  ***********/
 /**************************************************/
 
 
 x = 0;
-    while (x < 2) {
+    while (playerOneCards.length !== 52 || playerTwoCards.length !== 52) {    // Step 7. Once one player has all 52 cards in their stack....
         
         if (playerOneCards[x].score > playerTwoCards[x].score) {
             console.log("Player One wins")
             playerOneCards.push(playerTwoCards[x]);
-            console.log(playerOneCards.length)          // Player One cards should add 1
-            playerTwoCards.pop([x]);
-            console.log(playerTwoCards.length)          // Player Two cards should minus 1
+            playerTwoCards.pop();
 
-            playerOneCards.push(playerOneCards[x]);     // Player One cards should add 1 (for 2 total)
-            console.log(playerOneCards.length)
+            playerOneCards.push(playerOneCards[x]);     
+            playerOneCards.shift()
             x++;
-            console.log(playerOneCards)
+
+                    if (playerOneCards.length === 52 ) {
+                        console.log("Game over. Player One is the winner!")
+                    }
+
         } else if (playerTwoCards[x].score > playerOneCards[x].score) {
             console.log("Player Two wins")
             playerTwoCards.push(playerOneCards[x]);
-            playerOneCards.pop([x]);
+            playerOneCards.pop();
             playerTwoCards.push(playerTwoCards[x]);
-            x++;                        
-        } else {
-            playerOneCards.push(playerOneCards([x]))    // Step 6. In the case of the tie, each player takes the card they played and places it 
-            playerTwoCards.push(playerTwoCards([x]))    // at the bottom of their stack, and then the game automatically plays the next round.
+            playerTwoCards.shift()
+            x++;              
+            
+                    if (playerTwoCards.length === 52 ) {
+                        console.log("Game over. Player Two is the winner!")
+                    }
+            
+        } else if (playerOneCards[x].score == playerTwoCards[x].score) {    // Step 6. In the case of the tie, each player takes the card they played and places it 
+            console.log("It's a tie")
+            playerOneCards.push(playerOneCards[x])                        //  at the bottom of their stack, and then the game automatically plays the next round.
+            playerOneCards.shift()
+            playerTwoCards.push(playerTwoCards[x])    
+            playerTwoCards.shift()
             x++;
-        }
+        } 
 
     }
 
